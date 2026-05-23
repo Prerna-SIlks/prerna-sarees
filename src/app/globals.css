@@ -1,0 +1,119 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+  }
+  :root {
+    --background: #FDF8F0;
+    --foreground: #1A0A0A;
+    --card: #ffffff;
+    --card-foreground: #1A0A0A;
+    --popover: #ffffff;
+    --popover-foreground: #1A0A0A;
+    --primary: #6B1D1D;
+    --primary-foreground: #F5E6C8;
+    --secondary: #C9A84C;
+    --secondary-foreground: #1A0A0A;
+    --muted: #f1ebe1;
+    --muted-foreground: #736b5e;
+    --accent: #C9A84C;
+    --accent-foreground: #1A0A0A;
+    --destructive: #dc2626;
+    --border: #e2d9c8;
+    --input: #e2d9c8;
+    --ring: #C9A84C;
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #1A0A0A;
+    --sidebar-primary: #6B1D1D;
+    --sidebar-primary-foreground: #F5E6C8;
+    --sidebar-accent: #f1ebe1;
+    --sidebar-accent-foreground: #1A0A0A;
+    --sidebar-border: #e2d9c8;
+    --sidebar-ring: #C9A84C;
+  }
+  .dark {
+    --background: #1A0A0A;
+    --foreground: #F5E6C8;
+    --card: #2a1a1a;
+    --card-foreground: #F5E6C8;
+    --popover: #2a1a1a;
+    --popover-foreground: #F5E6C8;
+    --primary: #C9A84C;
+    --primary-foreground: #1A0A0A;
+    --secondary: #6B1D1D;
+    --secondary-foreground: #F5E6C8;
+    --muted: #3a2a2a;
+    --muted-foreground: #a39b8e;
+    --accent: #C9A84C;
+    --accent-foreground: #1A0A0A;
+    --destructive: #dc2626;
+    --border: #4a3a3a;
+    --input: #4a3a3a;
+    --ring: #C9A84C;
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: #1A0A0A;
+    --sidebar-foreground: #F5E6C8;
+    --sidebar-primary: #C9A84C;
+    --sidebar-primary-foreground: #1A0A0A;
+    --sidebar-accent: #3a2a2a;
+    --sidebar-accent-foreground: #F5E6C8;
+    --sidebar-border: #4a3a3a;
+    --sidebar-ring: #C9A84C;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .animate-gold-shimmer {
+    animation: gold-shimmer 3s infinite linear;
+  }
+
+  @keyframes gold-shimmer {
+    0% { border-color: rgba(201, 168, 76, 0.3); }
+    50% { border-color: rgba(201, 168, 76, 1); }
+    100% { border-color: rgba(201, 168, 76, 0.3); }
+  }
+
+  .bg-pattern-paisley {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50c-10 0-20-10-20-20s10-20 20-20 20 10 20 20-10 20-20 20zm0-30c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10z' fill='%23C9A84C' fill-opacity='0.1'/%3E%3C/svg%3E");
+  }
+
+  /* Ornate Arch Mask for Occasion Cards */
+  .ornate-card-mask {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='300' height='400' viewBox='0 0 300 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M150 0C100 0 70 20 40 20C10 20 0 50 0 80V320C0 350 10 380 40 380C70 380 100 400 150 400C200 400 230 380 260 380C290 380 300 350 300 320V80C300 50 290 20 260 20C230 20 200 0 150 0Z' fill='black'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg width='300' height='400' viewBox='0 0 300 400' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M150 0C100 0 70 20 40 20C10 20 0 50 0 80V320C0 350 10 380 40 380C70 380 100 400 150 400C200 400 230 380 260 380C290 380 300 350 300 320V80C300 50 290 20 260 20C230 20 200 0 150 0Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+}
