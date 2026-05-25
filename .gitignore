@@ -49,3 +49,5 @@ refactor_others.js
 refactor_products.js
 remove_dupes.js
 run_sql.js
+
+.vercel

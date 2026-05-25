@@ -10,6 +10,7 @@ import { SupabaseSync } from "@/components/SupabaseSync";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { ClearAuthOnStartup } from "@/components/ClearAuthOnStartup";
 import { GlobalErrorCatcher } from "@/components/GlobalErrorCatcher";
+import SareeStylist from "@/components/SareeStylist";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Footer />
         <FloatingWhatsApp />
         <Toaster />
+        <SareeStylist />
       </body>
     </html>
   );
