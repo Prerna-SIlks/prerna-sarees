@@ -703,44 +703,44 @@ export default function AdminProductsPage() {
               {activeTab === "images" && (
                 <div className="space-y-6">
                   <div className="bg-white p-5 rounded-xl border border-gray-200">
-                    <h3 className="text-sm font-bold text-gray-800 mb-4">Current Images ({editingProduct.image_urls?.length || 0}/6)</h3>
-                    <div className="flex flex-wrap gap-4 mb-6">
-                      {editingProduct.image_urls?.map((url, idx) => (
-                        <div key={idx} className="relative group">
-                          <div className="relative h-32 w-24 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-                            <Image src={url} alt={`img-${idx}`} fill className="object-cover" />
-                          </div>
-                          <button
-                            onClick={() => {
-                              const newUrls = [...(editingProduct.image_urls || [])];
-                              newUrls.splice(idx, 1);
-                              setEditingProduct({ ...editingProduct, image_urls: newUrls });
+                    <h3 className="text-sm font-bold text-gray-800 mb-4">Product Images</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-2">
+                      {[0, 1, 2, 3].map((index) => (
+                        <div key={index} className="relative aspect-[3/4] group">
+                          <DragDropUpload
+                            bucket="product-images"
+                            folder="products"
+                            maxFiles={1}
+                            autoUpload={true}
+                            currentUrl={editingProduct.image_urls?.[index]}
+                            onUpload={(url) => {
+                              const updated = [...(editingProduct.image_urls || [])];
+                              updated[index] = url;
+                              setEditingProduct({ ...editingProduct, image_urls: updated });
                               setHasUnsavedChanges(true);
                             }}
-                            className="absolute -top-2 -right-2 h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-md z-10"
-                          >
-                            <X className="h-3 w-3" />
-                          </button>
-                          {idx === 0 && (
-                            <span className="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">MAIN</span>
+                          />
+                          {editingProduct.image_urls?.[index] && (
+                            <>
+                              <button
+                                onClick={() => {
+                                  const newUrls = [...(editingProduct.image_urls || [])];
+                                  newUrls.splice(index, 1);
+                                  setEditingProduct({ ...editingProduct, image_urls: newUrls });
+                                  setHasUnsavedChanges(true);
+                                }}
+                                className="absolute -top-2 -right-2 h-6 w-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-md z-10"
+                              >
+                                <X className="h-3 w-3" />
+                              </button>
+                              {index === 0 && (
+                                <span className="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1.5 py-0.5 rounded z-10">MAIN</span>
+                              )}
+                            </>
                           )}
                         </div>
                       ))}
                     </div>
-                    
-                    <h3 className="text-sm font-bold text-gray-800 mb-3">Upload New Images</h3>
-                    <DragDropUpload
-                      bucket="product-images"
-                      folder="products"
-                      maxFiles={6 - (editingProduct.image_urls?.length || 0)}
-                      onUploadComplete={(urls) => {
-                        setEditingProduct({ 
-                          ...editingProduct, 
-                          image_urls: [...(editingProduct.image_urls || []), ...urls] 
-                        });
-                        setHasUnsavedChanges(true);
-                      }}
-                    />
                   </div>
                 </div>
               )}

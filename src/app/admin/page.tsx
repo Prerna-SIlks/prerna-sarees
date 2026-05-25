@@ -49,8 +49,8 @@ export default function AdminDashboard() {
         .gt("stock", 0)
         .order("stock", { ascending: true });
 
-      const revToday = (ordersToday || []).reduce((s, o) => s + Number(o.total_amount), 0);
-      const revMonth = (ordersMonth || []).reduce((s, o) => s + Number(o.total_amount), 0);
+      const revToday = (ordersToday || []).reduce((s: any, o: any) => s + Number(o.total_amount), 0);
+      const revMonth = (ordersMonth || []).reduce((s: any, o: any) => s + Number(o.total_amount), 0);
 
       setStats({
         ordersToday: ordersToday?.length || 0,

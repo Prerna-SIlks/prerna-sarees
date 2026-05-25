@@ -43,7 +43,7 @@ export function SupabaseSync() {
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      async (event: any, session: any) => {
         if (session?.user) {
           await syncData(session.user.id);
         } else {
@@ -55,7 +55,7 @@ export function SupabaseSync() {
     );
 
     // Initial check
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    supabase.auth.getUser().then(({ data: { user } }: any) => {
       if (user) {
         syncData(user.id);
       }

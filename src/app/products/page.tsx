@@ -6,7 +6,7 @@ import { ProductFilters } from "@/components/ProductFilters";
 import { WishlistButton } from "@/components/WishlistButton";
 import { ProductSortDropdown } from "@/components/ProductSortDropdown";
 
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient as createClient } from "@/lib/supabase/server";
 
 export default async function ProductsPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   const supabase = createClient();

@@ -26,7 +26,7 @@ export function AnnouncementBar() {
       .order("sort_order");
 
     if (data && data.length > 0) {
-      const msgs = data.map((d) => d.value).filter(Boolean) as string[];
+      const msgs = data.map((d: any) => d.value).filter(Boolean) as string[];
       if (msgs.length > 0) setMessages(msgs);
     }
   }, [supabase]);

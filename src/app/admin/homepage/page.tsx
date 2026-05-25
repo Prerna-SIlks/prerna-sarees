@@ -102,7 +102,7 @@ function HeroTab() {
       .eq("section", "hero_slides");
 
     if (data && data.length > 0) {
-      const parsedSlides = data.sort((a,b) => a.key.localeCompare(b.key)).map(row => {
+      const parsedSlides = data.sort((a: any, b: any) => a.key.localeCompare(b.key)).map((row: any) => {
         try {
           return { key: row.key, ...JSON.parse(row.value) };
         } catch { return null; }
@@ -995,7 +995,7 @@ function ReelsTab() {
       .order("sort_order");
 
     if (data) {
-      setReels(data.map(d => ({
+      setReels(data.map((d: any) => ({
         id: d.key,
         videoUrl: d.image_url || "",
         productId: d.value || ""
@@ -1300,7 +1300,7 @@ function OccasionsTab() {
       .order("sort_order");
 
     if (data && data.length > 0) {
-      const parsed = data.map(row => {
+      const parsed = data.map((row: any) => {
         try {
           const val = JSON.parse(row.value || "{}");
           return {
@@ -1498,7 +1498,7 @@ function LookbookTab() {
       .order("sort_order");
 
     if (data && data.length > 0) {
-      const parsed = data.map(row => {
+      const parsed = data.map((row: any) => {
         try {
           const val = JSON.parse(row.value || "{}");
           return {

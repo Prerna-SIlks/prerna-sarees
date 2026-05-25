@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { LayoutDashboard, ShoppingCart, Package, Users, Ticket, LogOut, Menu, X, Home, Eye, Monitor, Smartphone, Tablet, RefreshCw, ExternalLink } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, Package, Users, Ticket, LogOut, Menu, X, Home, Eye, Monitor, Smartphone, Tablet, RefreshCw, ExternalLink, ReceiptText } from "lucide-react";
 import { usePreviewStore } from "@/lib/preview-store";
 
 const ADMIN_EMAIL = "prernasilks@gmail.com";
@@ -12,6 +12,7 @@ const ADMIN_EMAIL = "prernasilks@gmail.com";
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Orders", href: "/admin/orders", icon: ShoppingCart },
+  { label: "Bill Management", href: "/admin/bills", icon: ReceiptText },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Customers", href: "/admin/customers", icon: Users },
   { label: "Coupons", href: "/admin/coupons", icon: Ticket },

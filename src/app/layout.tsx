@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { SupabaseSync } from "@/components/SupabaseSync";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { ClearAuthOnStartup } from "@/components/ClearAuthOnStartup";
+import { GlobalErrorCatcher } from "@/components/GlobalErrorCatcher";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", inter.variable, playfair.variable)}>
       <body className="font-sans antialiased bg-background text-foreground flex flex-col min-h-screen">
+        <GlobalErrorCatcher />
         <ClearAuthOnStartup />
         <SupabaseSync />
         <AnnouncementBar />

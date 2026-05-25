@@ -41,7 +41,7 @@ export function Header() {
           .eq('user_id', authUser.id);
           
         if (wlData && wlData.length > 0) {
-          const productIds = wlData.map(item => item.product_id);
+          const productIds = wlData.map((item: any) => item.product_id);
           const { data: productsData } = await supabase
             .from('products')
             .select('*')
@@ -57,7 +57,7 @@ export function Header() {
     };
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       if (session?.user) {
         const email = session.user.email || "";
         const name = session.user.user_metadata?.first_name || email.split("@")[0];

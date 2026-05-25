@@ -41,13 +41,14 @@ export default function AdminCustomersPage() {
       .select("user_id, total_amount");
 
     const orderMap: Record<string, { count: number; spent: number }> = {};
-    (ordersData || []).forEach((o) => {
+    (ordersData || []).forEach((o: any) => {
+      if (!o.user_id) return;
       if (!orderMap[o.user_id]) orderMap[o.user_id] = { count: 0, spent: 0 };
       orderMap[o.user_id].count++;
       orderMap[o.user_id].spent += Number(o.total_amount);
     });
 
-    const enriched: Customer[] = usersData.map((u) => ({
+    const enriched: Customer[] = usersData.map((u: any) => ({
       id: u.id,
       email: u.email || "—",
       first_name: u.first_name,

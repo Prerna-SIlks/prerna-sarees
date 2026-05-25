@@ -15,11 +15,7 @@ export async function POST(req: Request) {
       process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
     
-    // Remove color from updateData since it doesn't exist in the products table schema
-    // and causes the update to fail.
-    if ('color' in updateData) {
-      delete updateData.color;
-    }
+    // Allow color to be passed to Supabase
     
     if (id === 'new') {
        const { data, error } = await supabase

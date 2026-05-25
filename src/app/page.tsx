@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { WishlistButton } from "@/components/WishlistButton";
 import { ShoppingCart, Camera } from "lucide-react";
 
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient as createClient } from "@/lib/supabase/server";
 
 const DEFAULT_CATEGORIES = [
   { name: "Silk Sarees", image: "/images/products/saree-2.jpg", link: "/products?category=silk-sarees" },

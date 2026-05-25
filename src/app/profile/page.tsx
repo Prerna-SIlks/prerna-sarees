@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Loader2, Package, Clock, CheckCircle2, XCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import InvoiceButton from "@/components/InvoiceButton";
 
 interface Order {
   id: string;
@@ -203,6 +204,16 @@ export default function ProfilePage() {
                             ))}
                           </div>
                         )}
+                        <div className="mt-6 flex justify-end">
+                          <InvoiceButton 
+                            order={order} 
+                            canDownload={
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              (order as any).payment_method === 'cod' || 
+                              ['confirmed', 'shipped', 'delivered'].includes(order.status)
+                            } 
+                          />
+                        </div>
                       </div>
                     )}
                   </div>

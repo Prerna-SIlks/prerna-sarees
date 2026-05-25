@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient as createClient } from "@/lib/supabase/server";
 import { Product } from "@/lib/data/mock-products";
 
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
@@ -35,15 +35,34 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
     category: p.categories.slug
   };
 
-  // Ensure images array exists and parse if needed
-  let additionalImages: string[] = [];
-  if (product.images) {
-    try {
-      additionalImages = typeof product.images === 'string' ? JSON.parse(product.images) : product.images;
-    } catch {
-      additionalImages = [];
+  const productImages = (() => {
+    let imgs: string[] = [];
+    const rawImages = product.image_urls || product.images;
+    
+    let parsedArray: unknown[] = [];
+    if (Array.isArray(rawImages)) {
+      parsedArray = rawImages;
+    } else if (typeof rawImages === 'string') {
+      try {
+        parsedArray = JSON.parse(rawImages);
+        if (!Array.isArray(parsedArray)) parsedArray = [];
+      } catch {
+        parsedArray = [];
+      }
     }
-  }
+    
+    if (parsedArray.length > 0) {
+      imgs = parsedArray.filter(
+        (img: unknown) => img && typeof img === 'string' && img.length > 0
+      ) as string[];
+    }
+    
+    if (imgs.length === 0 && product.image_url) {
+      imgs = [product.image_url];
+    }
+    
+    return imgs;
+  })();
 
   // Fetch similar products (same category)
   let { data: similarProducts } = await supabase
@@ -74,7 +93,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
       {/* Track this product view */}
       <RecentlyViewedTracker product={product} />
 
-      <div className="max-w-[1400px] mx-auto px-4 md:px-[40px] pt-[32px] pb-12">
+      <div className="max-w-[1200px] mx-auto px-6 py-[32px]">
         
         {/* Breadcrumbs */}
         <div className="text-[11px] tracking-widest uppercase font-medium text-[#1A0A0A]/60 mb-8 font-sans">
@@ -87,19 +106,18 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
           <span className="text-[#1A0A0A]">{product.title}</span>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-[40px] lg:gap-[48px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[48px]">
           
-          {/* LEFT COLUMN (70%) - Image Gallery */}
-          <div className="w-full lg:w-[70%]">
+          {/* LEFT: image gallery */}
+          <div className="w-full">
             <ProductGallery 
               title={product.title} 
-              mainImage={product.image_urls[0]} 
-              images={additionalImages} 
+              images={productImages} 
             />
           </div>
 
-          {/* RIGHT COLUMN (30%) - Product Info */}
-          <div className="w-full lg:w-[30%] min-w-[320px] max-w-[460px] flex flex-col justify-start">
+          {/* RIGHT: product info */}
+          <div className="w-full flex flex-col justify-start">
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#1A0A0A] mb-2">{product.title}</h1>
             
             {/* Star Rating & Reviews */}
