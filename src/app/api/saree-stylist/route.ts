@@ -67,7 +67,7 @@ Rules:
     })
     
     // Build conversation history for context
-    const history = (conversationHistory || [])
+    let history = (conversationHistory || [])
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .slice(-6) // last 6 messages for context
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,8 +75,15 @@ Rules:
         role: msg.role,
         parts: [{ text: msg.content }]
       }))
+
+    // Gemini strictly requires history to start with 'user'
+    while (history.length > 0 && history[0].role === 'model') {
+      history.shift()
+    }
     
-    const chat = model.startChat({ history })
+    const chat = model.startChat({
+      history: history
+    })
     
     const result = await chat.sendMessage(message)
     const response = await result.response
