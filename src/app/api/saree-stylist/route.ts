@@ -14,12 +14,12 @@ export async function POST(req: Request) {
     
     const { data: products } = await supabase
       .from('products')
-      .select('id, name, price, category, fabric, color, description')
+      .select('id, title, price, category_id, fabric, color, description')
       .order('created_at', { ascending: false })
     
     // Build products context
     const productsContext = products?.map(p => 
-      `ID:${p.id} | ${p.name} | ₹${p.price} | ${p.category} | ${p.fabric} | Color:${p.color || 'Assorted'}`
+      `ID:${p.id} | ${p.title} | ₹${p.price} | Category:${p.category_id} | ${p.fabric} | Color:${p.color || 'Assorted'}`
     ).join('\n') || ''
     
     const genAI = new GoogleGenerativeAI(
