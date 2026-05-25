@@ -67,7 +67,7 @@ Rules:
     })
     
     // Build conversation history for context
-    let history = (conversationHistory || [])
+    const history = (conversationHistory || [])
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .slice(-6) // last 6 messages for context
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
